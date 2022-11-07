@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+}
+
+.title__main {
+  text-align: center;
+  font-size: 20px;
+}
+
+.card__wrap {
+  display: flex;
+  align-items: flex-start;
+}
+
+.card__image {
+  margin-right: 20px;
+  max-width: 250px;
+  width: 100%;
+}
+
+.card__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.card__list span {
+  margin-bottom: 3px;
+  display: block;
+}
+img {
+  max-width: 100%;
+}
+
+.wrapper__large {
+  max-width: 920px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.block_offset {
+  margin-bottom: 30px;
+}
+
+.card_offset {
+  margin-bottom: 40px;
+}
+
+.block_border {
+  padding: 20px;
+  border: 1px solid #000;
+}
+
+
+.title__medium {
+  font-size: 18px;
+  text-align: center;
+}
+
+.block__head {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.block__content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.block__item {
+  width: 33.3%;
+  padding: 20px 10px;
+  border-bottom: 1px solid #000;
+}
+
+.block__wrap {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+}
+
+.block__list-item {
+  width: 33.3%;
+  padding: 8px 10px;
+}
+.block__list {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contacts__wrap {
+  max-width: 650px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contacts__wrap a {
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.time-block {
+  max-width: 450px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.time-block li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.time-block li:last-child {
+  margin-bottom: 0;
+}
