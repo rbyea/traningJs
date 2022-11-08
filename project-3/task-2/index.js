@@ -1,6 +1,6 @@
 let num = 9;
 let text = 'String';
-let checked = true
+let checked = true;
 
 num = "Поменяет на тип 'String'";
 text = 999;
