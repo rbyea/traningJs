@@ -8,4 +8,4 @@ let userAgeNumber = Number(userAgeTrim);
 let resultUser = userNameTrim;
 let resultAge = userAgeNumber;
 
-alert(`Вас ховут ${resultUser} и вам ${resultAge}`);
+alert(`Вас зовут ${resultUser} и вам ${resultAge} лет`);
