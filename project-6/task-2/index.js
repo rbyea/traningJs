@@ -16,14 +16,15 @@ const startQuestions = () => {
         }
     }
 }
-
-startQuestions();
-
-for (const arrKey in objQuestion) {
-    // console.log(objQuestion[arrKey])
-    for(let k = 1; k <= 1; k++) {
-        arr.includes(objQuestion[arrKey]) ? correctAnswers++ : incorrectAnswers++
+const comparisonArr = () => {
+    for (const arrKey in objQuestion) {
+        for(let k = 1; k <= 1; k++) {
+            arr.includes(objQuestion[arrKey]) ? correctAnswers++ : incorrectAnswers++
+        }
     }
 }
+
+startQuestions();
+comparisonArr();
 
 alert(`Конец теста! Правильные ответы - ${correctAnswers}; Неправильные ответы - ${incorrectAnswers}.`);
