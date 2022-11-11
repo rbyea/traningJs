@@ -22,11 +22,7 @@ startQuestions();
 for (const arrKey in objQuestion) {
     // console.log(objQuestion[arrKey])
     for(let k = 1; k <= 1; k++) {
-        if(arr.includes(objQuestion[arrKey])) {
-            correctAnswers++
-        } else {
-            incorrectAnswers++
-        }
+        arr.includes(objQuestion[arrKey]) ? correctAnswers++ : incorrectAnswers++
     }
 }
 
