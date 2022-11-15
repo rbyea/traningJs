@@ -1,13 +1,18 @@
 const getDivisorsCount = (number = NaN) => {
     let arr = []
-    if(number < 0 || Number.isInteger(number)) {
+
+    if (typeof number !== "number") {
+        return NaN;
+    }
+
+    if(number > 0 || Number.isInteger(number)) {
         for(let i = 0; i <= number; i++) {
             Number.isInteger(number / i) ? arr.push(i) : i
         }
     } else {
         alert(`${number} должен быть целым числом и больше нуля!`)
     }
-    return arr
+    return arr.length
 }
 
 console.log(getDivisorsCount(4)); // Вернет 3 (делители - 1, 2, 4)
