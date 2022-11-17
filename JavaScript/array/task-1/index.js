@@ -3,13 +3,12 @@ const peopleWaiting = ['Кристина', 'Олег', 'Кирилл', 'Мари
 const giveParcel = () => {
     for(let i = 0; i<3; i++) {
         alert(`${peopleWaiting.shift()} получил(а) посылку. В очереди осталось ${peopleWaiting.length} человек.`)
-        // peopleWaiting.shift()
     }
 }
 
 const leaveQueueWithoutParcel = () => {
-    console.log(peopleWaiting.length)
-    for(let k = 0; k<4; k++) {
+    let peopleLength = peopleWaiting.length
+    for(let k = 0; k<peopleLength; k++) {
         alert(`${peopleWaiting.shift()} не получил(а) посылку и ушел(ла) из очереди`)
     }
 }

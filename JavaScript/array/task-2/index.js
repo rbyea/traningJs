@@ -5,9 +5,7 @@ const getSumOfSequence = number => {
     for(let i = 1; i<=number; i++) {
         num.push(i)
     }
-
     sum = num[0] + num[num.length-1]
-
     return sum
 }
 
