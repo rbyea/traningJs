@@ -5,7 +5,7 @@ const checkQuestionAnswer = (question,correctAnswer) => {
 
     console.log(question, correctAnswer , getAnswer)
 
-    getAnswer === correctAnswer.toLowerCase() ? alert(`Ответ верный`) : alert(`Ответ неверный`);
+    getAnswer === correctAnswer.toLowerCase() ? alert(`Ответ верный`) : alert(`Ответ неверный`)
 }
 
 checkQuestionAnswer('Арбуз это фрукт или ягода?', 'Ягода');
