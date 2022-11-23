@@ -1,10 +1,25 @@
-let priceObj = {
-    Peta: 100,
-    Ann: 100,
-    John: 100,
-}
-let result = 0
+const ordersArr = [4, 2, 1, 3];
+const people = [
+    { id: 1, name: "Максим" },
+    { id: 2, name: "Николай" },
+    { id: 3, name: "Ангелина" },
+    { id: 4, name: "Виталий" },
+];
 
-for (const k in priceObj) {
-    result += priceObj[k]
+const giveTalonsInOrder = (patients, orders) => {
+    const sortArr = []
+    for(let i = 0; i < orders.length; i++) {
+        for(let j = 0; j < orders.length; j++) {
+            if(orders[i] === patients[j].id) {
+                sortArr.push(patients[j])
+            }
+        }
+    }
+
+    return sortArr
 }
+
+// 4 2 1 3 ==>
+// 4 2 1 3 | 4 2 1 3 | 4 2 1 3 | 4 2 1 3
+
+console.log(giveTalonsInOrder(people, ordersArr))
