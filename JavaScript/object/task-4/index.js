@@ -5,13 +5,14 @@ const student = {
 }
 
 const giveJobToStudent = (student, jobName) => {
-    let updatedStudent = {
+    let newObj = {
         ...student,
         job: jobName
     }
-
-    console.log(updatedStudent)
-    alert(`Поздравляем! У студента ${updatedStudent.fullName} появилась новая работа! Теперь он ${updatedStudent.job}`)
+    alert(`Поздравляем! У студента ${newObj.fullName} появилась новая работа! Теперь он ${newObj.job}`)
+    return newObj
 }
 
 const updatedStudent = giveJobToStudent(student, 'веб-разработчик');
+
+console.log(updatedStudent)
