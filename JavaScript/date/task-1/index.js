@@ -3,12 +3,7 @@ const getDateFormat = (date, separator) => {
     const month = date.getMonth()
     const year = date.getFullYear();
 
-
-    if(3 >= 9) {
-        console.log(true)
-    }
-
-    console.log(`${day}${separator}${month}${separator}${year}`)
+    console.log(`${('0' + day).slice(-2)}${separator}${('0' + month).slice(-2)}${separator}${year}`)
 
 }
 
