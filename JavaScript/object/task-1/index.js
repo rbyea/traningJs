@@ -16,12 +16,11 @@ const users = [
     }
 ];
 
-let onlineUsers = []
+const onlineUsers = users.filter(obj => {
+    return obj.status === 'online'
+})
+const userNames = onlineUsers.map(item => item.username)
 
-for (const user of users) {
-     if(user.status === 'online') {
-         onlineUsers.push(user)
-     }
-}
-alert(`Сейчас в онлайн следующие пользователи: ${onlineUsers[0].username}, ${onlineUsers[1].username}`)
+console.log(`Сейчас в онлайн ${onlineUsers.length} пользователя их имена: ${userNames.join(', ')}`)
+
 
