@@ -23,11 +23,11 @@ const getTotalPriceOfShoppingBag = (shoppingBagArray) => {
         let shoppingId = shoppingBagArrayElement.productId;
         let shoppingCount = shoppingBagArrayElement.count;
         let groceriesPrice = groceries[shoppingId].price;
-        let groceriesCount = groceries[shoppingId].discount;
+        let groceriesDiscount = groceries[shoppingId].discount;
 
         allPrice += groceriesPrice * shoppingCount
-        if(groceriesCount > 0) {
-            priceDiscount += groceriesPrice * shoppingCount * groceriesCount / 100
+        if(groceriesDiscount > 0) {
+            priceDiscount += groceriesPrice * shoppingCount * groceriesDiscount / 100
         }
     }
 
