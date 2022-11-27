@@ -9,14 +9,15 @@ const getKiller = (suspectInfo , deadPeople ) => {
        }
     }
 }
-// getKiller(
-//     {
-//         Brad: [],
-//         Megan: ["Ben", "Kevin"],
-//         Finn: []
-//     },
-//     ["Ben"]
-// )
+
+getKiller(
+    {
+        Brad: [],
+        Megan: ["Ben", "Kevin"],
+        Finn: []
+    },
+    ["Ben"]
+)
 
 getKiller(
     {
