@@ -1,18 +1,14 @@
+
 const getKiller = (suspectInfo , deadPeople ) => {
-    let killer = []
-    for (const suspectInfoKey in suspectInfo ) {
-        for(let i=0; i<deadPeople.length; i++){
-            for(let j = 0; j < suspectInfo[suspectInfoKey].length; j++) {
-                if(suspectInfo[suspectInfoKey][j] === deadPeople[i]) {
-                    console.log(suspectInfo[suspectInfoKey][j])
-                    killer.push(suspectInfoKey)
-                }
-            }
-        }
+    const keys = Object.keys(suspectInfo)
+    let fnCheck = (suspectsContacts, victim) => victim.every(item => suspectsContacts.includes(item))
+
+    for (let i = 0; i < keys.length; i++) {
+       if(fnCheck(suspectInfo[keys[i]], deadPeople)) {
+           console.log(`Убийца ${keys[i]}`)
+       }
     }
 }
-
-
 // getKiller(
 //     {
 //         Brad: [],
@@ -30,15 +26,6 @@ getKiller(
     },
     ["Lucas", "Bill"]
 )
-
-
-
-
-
-
-
-
-
 
 
 
