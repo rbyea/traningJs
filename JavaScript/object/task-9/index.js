@@ -19,8 +19,6 @@ const winnerApplicants = {
 
 const getWinner = (applicants, winnerObject ) => {
     let keys = Object.keys(applicants)
-    console.log('applicantsKeys: ', keys)
-    console.log('applicants:', applicants)
     function getRandomNumberInRange(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
     }

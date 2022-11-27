@@ -8,7 +8,7 @@ const enemy = {
 };
 
 const startGame = (heroPlayer, enemyPlayer, heatEnemy, heatHero) => {
-    let randomNumber
+    let randomNumber;
     let statusGame = 0;
     const getRandomNumberInRange = (min, max) => {
         randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
