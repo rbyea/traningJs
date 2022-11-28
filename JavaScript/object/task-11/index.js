@@ -41,7 +41,7 @@ const allowVisa = (people) => {
         }
     })
 
-    let filterYear = people.filter((el) => {
+    let filterObj = people.filter((el) => {
         for(let i = 0; i<newArr.length; i++) {
             if(newArr[i].join('.') === el.passportExpiration && el.criminalRecord === false) {
                 return el
@@ -49,7 +49,7 @@ const allowVisa = (people) => {
         }
     })
 
-    return filterYear
+    return filterObj
 }
 
 const result = allowVisa(peopleWithVisa);
