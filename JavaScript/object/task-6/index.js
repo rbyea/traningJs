@@ -33,7 +33,7 @@ const getTotalPriceOfShoppingBag = (shoppingBagArray) => {
 
     let result = allPrice - priceDiscount
 
-    return result.toFixed(2)
+    return +result.toFixed(2)
 }
 
 const totalPrice = getTotalPriceOfShoppingBag(shoppingBag);

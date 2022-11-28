@@ -23,8 +23,7 @@ const getWinner = (applicants, winnerObject ) => {
         return Math.floor(Math.random() * (max - min)) + min;
     }
     let keysNumber = getRandomNumberInRange(0, keys.length)
-    let newObj = Object.assign(winnerObject, applicants[keys[keysNumber]])
-    return newObj
+    return {...winnerObject, ...applicants[keys[keysNumber]]}
 }
 
 const resultWinner = getWinner(winnerApplicants, todaysWinner);
