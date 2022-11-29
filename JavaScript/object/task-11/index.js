@@ -1,5 +1,3 @@
-
-
 const peopleWithVisa = [
     {
         firstName: 'Stasia',
@@ -28,24 +26,12 @@ const peopleWithVisa = [
 ];
 
 const allowVisa = (people) => {
-    let dateTime = new Date().getTime()
-    let arr = []
 
-    for(let i = 0; i<people.length; i++) {
-        arr.push(people[i].passportExpiration.split('.'))
-    }
-
-    let newArr = arr.filter((el) => {
-        if(dateTime < new Date(`${el[1]}.${el[0]}.${el[2]}`)) {
-            return el
-        }
-    })
+    const serializeData = str => str.split('.').reverse().join('.')
 
     let filterObj = people.filter((el) => {
-        for(let i = 0; i<newArr.length; i++) {
-            if(newArr[i].join('.') === el.passportExpiration && el.criminalRecord === false) {
-                return el
-            }
+        if(new Date(serializeData(el.passportExpiration)).getTime() > Date.now() && !el.criminalRecord) {
+            return el
         }
     })
 
