@@ -39,7 +39,6 @@ class Student {
     setNewStatus(newStatus) {
         this.status = newStatus;
     }
-
 }
 
 const student = new Student ('Maxim', 20);
