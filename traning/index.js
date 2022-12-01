@@ -23,3 +23,4 @@ const giveTalonsInOrder = (patients, orders) => {
 // 4 2 1 3 | 4 2 1 3 | 4 2 1 3 | 4 2 1 3
 
 console.log(giveTalonsInOrder(people, ordersArr))
+
