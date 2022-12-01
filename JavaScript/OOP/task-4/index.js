@@ -5,14 +5,16 @@ class Dictionary {
     }
     add(word, description) {
         let keys = Object.keys(this.words)
+        let obj = {word: word, description: description}
+
         if(keys.length === 0) {
-            this.words[word] = {word: word, description: description}
+            this.words[word] = obj
         } else {
-            for (let i = 0; i<keys.length; i++) {
-                keys[i] !== word
-                    ? this.words[word] = {word: word, description: description}
-                    : console.log(false)
-            }
+            keys.forEach(el => {
+                el !== word
+                    ? this.words[word] = obj
+                        : console.log(false)
+            })
         }
     }
     remove(name) {
@@ -43,26 +45,22 @@ class HardWordsDictionary  extends Dictionary {
     }
     add(word, description) {
         let keys = Object.keys(this.words)
+        let obj = {word: word, description: description, isDifficult: true}
         if(keys.length === 0) {
-            this.words[word] = {word: word, description: description, isDifficult: true}
+            this.words[word] = obj
         } else {
-            for (let i = 0; i<keys.length; i++) {
-                keys[i] !== word
-                    ? this.words[word] = {word: word, description: description,isDifficult: true}
-                    : console.log(false)
-            }
+            keys.forEach(el => {
+                el !== word
+                    ? this.words[word] = obj
+                        : console.log(false)
+            })
         }
     }
 }
 
 const hardWordsDictionary = new HardWordsDictionary('Сложные слова');
-
 hardWordsDictionary.add('дилетант', 'Тот, кто занимается наукой или искусством без специальной подготовки, обладая только поверхностными знаниями.');
-
 hardWordsDictionary.add('неологизм', 'Новое слово или выражение, а также новое значение старого слова.');
-
 hardWordsDictionary.add('квант', 'Неделимая часть какой-либо величины в физике.');
-
 hardWordsDictionary.remove('неологизм');
-
 hardWordsDictionary.showAllWords();
