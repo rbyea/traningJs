@@ -25,10 +25,11 @@ const attacker = {
       this.artillery += 5
     },
     attack(defenderObject) {
+        console.log(this.checkChancesToWin(defenderObject)[0])
         let percent = this.checkChancesToWin(defenderObject)[0] / this.checkChancesToWin(defenderObject)[1] * 100
         if(percent < 70) {
-            this.improveArmy()
             console.log(`Наши шансы равны ${this.checkChancesToWin(defenderObject)[0]}/${this.checkChancesToWin(defenderObject)[1]}. Необходимо укрепление!`)
+            this.improveArmy()
         } else {
             console.log(`Мы усилились! Мы несомненно победим! Наши шансы высоки!`)
         }
