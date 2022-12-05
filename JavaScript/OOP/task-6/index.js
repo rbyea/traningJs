@@ -5,7 +5,6 @@ const attacker = {
     artillery: 3,
     checkChancesToWin(defenderObject) {
         let deferObj = Object.keys(defenderObject)
-        let arr = []
         let chance = 0;
 
         deferObj.forEach((el) => {
