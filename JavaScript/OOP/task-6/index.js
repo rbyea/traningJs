@@ -8,15 +8,13 @@ const attacker = {
         let arr = []
         let chance = 0;
 
-        deferObj.filter((el) => {
+        deferObj.forEach((el) => {
             if(this[el] > defenderObject[el]) {
                chance++
             }
         })
 
-        arr.push(chance, deferObj.length)
-
-        return arr
+        return [chance, deferObj.length]
     },
     improveArmy() {
       this.archer += 5
@@ -25,10 +23,10 @@ const attacker = {
       this.artillery += 5
     },
     attack(defenderObject) {
-        console.log(this.checkChancesToWin(defenderObject)[0])
-        let percent = this.checkChancesToWin(defenderObject)[0] / this.checkChancesToWin(defenderObject)[1] * 100
+        const [chance, totalChance] = this.checkChancesToWin(defenderObject)
+        let percent = chance / totalChance * 100
         if(percent < 70) {
-            console.log(`Наши шансы равны ${this.checkChancesToWin(defenderObject)[0]}/${this.checkChancesToWin(defenderObject)[1]}. Необходимо укрепление!`)
+            console.log(`Наши шансы равны ${chance}/${totalChance}. Необходимо укрепление!`)
             this.improveArmy()
         } else {
             console.log(`Мы усилились! Мы несомненно победим! Наши шансы высоки!`)
