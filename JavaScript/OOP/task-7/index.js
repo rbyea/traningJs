@@ -1,77 +1,60 @@
 class Dictionary {
+    #name
+    #words
     constructor(name) {
-        this.name = name
-        this.words = {}
+        this.#name = name
+        this.#words = {}
     }
-    add(word, description) {
-        let keys = Object.keys(this.words)
-        let obj = {word: word, description: description}
+    get mainName() {
+        return this.#name
+    }
+    set mainName(value) {
+       this.#name = value
+    }
+    get allWords() {
+        return this.#words
+    }
+    addNewWord(word, description) {
+        this.add(word, description);
+    }
 
-        if(keys.length === 0) {
-            this.words[word] = obj
-        } else {
-            keys.forEach(el => {
-                el !== word
-                    ? this.words[word] = obj
-                    : console.log(false)
-            })
-        }
+    add(word, description) {
+        if (!this.allWords.hasOwnProperty(word))
+            this.allWords[word] = { word, description }
     }
-    remove(name) {
-        delete this.words[name]
-        console.log(this)
+    remove(word) {
+        delete this.allWords[word]
     }
     get(word) {
-        console.log(this.words[word])
+        return this.allWords[word]
     }
     showAllWords() {
-        let keys = Object.keys(this.words)
-        keys.forEach((el) => {
-            console.log(`${this.words[el].word} - ${this.words[el].description}`)
-        })
+        for (let key of Object.keys(this.allWords)) {
+            console.log(`${key} - ${this.allWords[key].description}`)
+        }
     }
 }
 
-const dictionary = new Dictionary('Толковый словарь');
-dictionary.add('JavaScript', 'популярный язык программирования');
-dictionary.add('Веб-разработчик', 'Человек, который создает новые сервисы и сайты или поддерживает и дополняет существующие');
-dictionary.remove('Веб-разработчик');
-dictionary.get('JavaScript') // по поводу get, если честно чет не допонял , что ваще нужно сделать
-dictionary.showAllWords();
-
-class HardWordsDictionary  extends Dictionary {
+class HardWordsDictionary extends Dictionary {
     constructor(name) {
-        super(name);
+        super(name)
     }
     add(word, description) {
-        let keys = Object.keys(this.words)
-        let obj = {word: word, description: description, isDifficult: true}
-        if(keys.length === 0) {
-            this.words[word] = obj
-        } else {
-            keys.forEach(el => {
-                el !== word
-                    ? this.words[word] = obj
-                    : console.log(false)
-            })
+        if (!this.allWords.hasOwnProperty(word)) {
+            this.allWords[word] = { word, description, isDifficult: true }
         }
     }
 }
 
 const hardWordsDictionary = new HardWordsDictionary('Сложные слова');
-
 hardWordsDictionary.add('дилетант', 'Тот, кто занимается наукой или искусством без специальной подготовки, обладая только поверхностными знаниями.');
-
 hardWordsDictionary.add('неологизм', 'Новое слово или выражение, а также новое значение старого слова.');
-
 hardWordsDictionary.add('квант', 'Неделимая часть какой-либо величины в физике.');
 
 hardWordsDictionary.remove('неологизм');
-
 hardWordsDictionary.showAllWords();
 
 console.log(hardWordsDictionary.mainName); // Сложные слова
 hardWordsDictionary.mainName = 'Новый Словарь';
 console.log(hardWordsDictionary.mainName); // Новый Словарь
-console.log(hardWordsDictionary.allWords); // выводит объект в котором есть слова
-// дилетант и квант
+console.log(hardWordsDictionary.allWords); // выводит объект в котором есть слова дилетант и квант
