@@ -32,8 +32,9 @@ createTaskForm.addEventListener('submit', (e) => {
 
     taskNameInput.value = ''
     taskNameInput.focus()
+
+    console.log(true)
     const task = tasks.map((task) => {
-        console.log(task)
         return (
             `<div class="task-item" data-task-id="${task.id}">
                 <div class="task-item__main-container">
