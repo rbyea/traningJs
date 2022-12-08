@@ -288,6 +288,24 @@ body {
 
 .create-task-block {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     margin-bottom: 40px;
+}
+
+.create-task-block__list {
+    display: flex;
+    align-content: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.error-message-block {
+    display: none;
+    position: relative;
+    margin-top: 5px;
+}
+
+.error-message-block.active {
+    display: block;
 }
