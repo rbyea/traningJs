@@ -29,5 +29,3 @@ newForm.append(newLabelPasswrod)
 newLabelPasswrod.append(newInputPassword)
 newLabelPasswrod.prepend('Пароль')
 newForm.append(button)
-
-
