@@ -27,7 +27,49 @@ const createTaskForm = document.querySelector('.create-task-block')
 const tasksList = document.querySelector('.tasks-list')
 const spanError = document.querySelector('.error-message-block')
 const bodyHtml = document.querySelector('body')
-let modalPosition
+const createTooltip = (text) => {
+    const tooltip = document.createElement('span')
+    tooltip.textContent = text
+    tooltip.classList.add('tooltip')
+
+    return tooltip
+}
+const conclusionTasks = (tasks) => {
+    const task = tasks.map((task,index) => {
+        return (
+            `<div class="task-item" data-task-id="${task.id}">
+                 <div class="task-item__main-container">
+                     <div class="task-item__main-content">
+                                        <form class="checkbox-form">
+                                            <input class="checkbox-form__checkbox" type="checkbox" ${task.completed ? checked : ''} id="${task.id}">
+                                            <label for="${task.id}"></label>
+                                        </form>
+                                        <span class="task-item__text">
+                                            ${task.text}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <button class="task-item__delete-button default-button delete-button" data-delete-task-id="${task.id}">
+                                            Удалить
+                                        </button>
+                                    </div>
+                           </div>
+                        </div>`
+        )
+    })
+    tasksList.innerHTML = task.join('')
+}
+
+const modalDown = () => {
+    setTimeout(() => {
+        popupMood.classList.add('modal-overlay_hidden')
+    }, 300)
+}
+const modalUp = () => {
+    setTimeout(() => {
+        popupMood.classList.add('active')
+    }, 300)
+}
 
 //modal
 const popupMood = document.createElement('div')
@@ -53,41 +95,47 @@ const addModalOverlay = modalObj.map((task) => {
 })
 popupMood.innerHTML = addModalOverlay.join(',')
 
-// const task = tasks.map((task,index) => {
-//     return (
-//         `<div class="task-item" data-task-id="${task.id}">
-//                             <div class="task-item__main-container">
-//                                     <div class="task-item__main-content">
-//                                         <form class="checkbox-form">
-//                                             <input class="checkbox-form__checkbox" type="checkbox" ${task.completed ? checked : ''} id="${task.id}">
-//                                             <label for="${task.id}"></label>
-//                                         </form>
-//                                         <span class="task-item__text">
-//                                             ${task.text}
-//                                         </span>
-//                                     </div>
-//                                     <div>
-//                                         <button class="task-item__delete-button default-button delete-button" data-delete-task-id="${task.id}">
-//                                             Удалить
-//                                         </button>
-//                                     </div>
-//                            </div>
-//                         </div>`
-//     )
-// })
-// tasksList.innerHTML = task.join('')
-const deleteTasks = () => {
-    const getDeleteTasksButtons = document.querySelectorAll('.task-item__delete-button')
+const modalEvents = (id) => {
+    popupMood.addEventListener('click', (e) => {
+        const {target} = e
+        const btnModalCancel = target.className.includes('delete-modal__cancel-button')
+        const btnModalConfirm = target.className.includes('delete-modal__confirm-button')
+        const closestModalWrap = target.closest('.modal-overlay')
+        const regionModalWrap = target.className.includes('modal-overlay ')
 
-    getDeleteTasksButtons.forEach((el) => {
-        el.addEventListener('click', (e) => {
+        if(btnModalCancel) {
+            modalDown()
+            closestModalWrap.classList.remove('active')
+        } else if(btnModalConfirm) {
+            const indexTasks = tasks.findIndex(n => {
+                return n.id === id
+            })
+            if (indexTasks !== -1) {
+                tasks.splice(indexTasks, 1);
+            }
+            conclusionTasks(tasks)
+            modalDown()
+            closestModalWrap.classList.remove('active')
+        } else if (regionModalWrap) {
+            modalDown()
+            closestModalWrap.classList.remove('active')
+        }
+    })
+}
+
+// tasks
+const buttonTask = () => {
+    tasksList.addEventListener('click', (e) => {
+        const isDelButton = e.target.closest('.task-item__delete-button')
+        if(isDelButton) {
             const {target} = e
             const buttonId = target.dataset.deleteTaskId
 
             const modal = document.querySelector('.modal-overlay')
             modal.classList.remove('modal-overlay_hidden')
+            modalUp()
             modalEvents(buttonId)
-        })
+        }
     })
 }
 createTaskForm.addEventListener('submit', (e) => {
@@ -111,29 +159,9 @@ createTaskForm.addEventListener('submit', (e) => {
                 completed: false,
                 text: taskNameInput.value,
             })
-            const task = tasks.map((task,index) => {
-                return (
-                    `<div class="task-item" data-task-id="${task.id}">
-                <div class="task-item__main-container">
-                    <div class="task-item__main-content">
-                        <form class="checkbox-form">
-                            <input class="checkbox-form__checkbox" type="checkbox" ${task.completed ? checked : ''} id="${task.id}">
-                            <label for="${task.id}"></label>
-                        </form>
-                        <span class="task-item__text">
-                            ${task.text}
-                        </span>
-                    </div>
-                    <button class="task-item__delete-button default-button delete-button" data-delete-task-id="${task.id}">
-                        Удалить
-                    </button>
-                </div>
-            </div>`
-                )
-            })
-            tasksList.innerHTML = task.join('')
+            conclusionTasks(tasks)
             spanError.classList.remove('active')
-            deleteTasks()
+            buttonTask()
         }
     } else {
         spanError.innerHTML = 'Название задачи не должно быть пустым'
@@ -142,14 +170,6 @@ createTaskForm.addEventListener('submit', (e) => {
     taskNameInput.value = ''
     taskNameInput.focus()
 })
-
-const createTooltip = (text) => {
-    const tooltip = document.createElement('span')
-    tooltip.textContent = text
-    tooltip.classList.add('tooltip')
-
-    return tooltip
-}
 
 document.addEventListener('mouseover', (e) => {
     const {target} = e
@@ -177,28 +197,6 @@ document.addEventListener('mouseout', (e) => {
     }
 })
 
-// modal events
-const modalEvents = (id) => {
-    const modalDeleteButtons = document.querySelectorAll('.delete-modal__button')
-    modalDeleteButtons.forEach((elBtn) => {
-        elBtn.addEventListener('click', (e) => {
-            const {target} = e
-            if(target.className.includes('delete-modal__cancel-button')) {
-                target.closest('.modal-overlay').classList.add('modal-overlay_hidden')
-            } else if(target.className.includes('delete-modal__confirm-button')) {
-                for(let i = 0; i<tasks.length; i++) {
-                    if(tasks[i].id === id) {
-                        delete tasks[i]
-                    }
-                }
 
-
-                // popupMood.innerHTML = addModalOverlay.join(',')
-
-                target.closest('.modal-overlay').classList.add('modal-overlay_hidden')
-            }
-        })
-    })
-}
 
 
