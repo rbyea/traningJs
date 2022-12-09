@@ -28,12 +28,36 @@ const tasksList = document.querySelector('.tasks-list')
 const spanError = document.querySelector('.error-message-block')
 const bodyHtml = document.querySelector('body')
 
+const themeRotate = () => {
+    if(bodyHtml.className.includes('theme-dark')) {
+        const taskItem = document.querySelectorAll('.task-item')
+        const button = document.querySelectorAll('button')
+
+        taskItem?.forEach((el) => {
+            el.style.color = '#fff'
+        })
+        button?.forEach((el) => {
+            el.style.border = '1px solid #fff'
+        })
+    }
+}
+
 const createTooltip = (text) => {
     const tooltip = document.createElement('span')
     tooltip.textContent = text
     tooltip.classList.add('tooltip')
 
     return tooltip
+}
+const modalDown = () => {
+    setTimeout(() => {
+        popupMood.classList.add('modal-overlay_hidden')
+    }, 300)
+}
+const modalUp = () => {
+    setTimeout(() => {
+        popupMood.classList.add('active')
+    }, 300)
 }
 const conclusionTasks = (tasks) => {
     const task = tasks.map((task,index) => {
@@ -59,28 +83,7 @@ const conclusionTasks = (tasks) => {
         )
     })
     tasksList.innerHTML = task.join('')
-    if(bodyHtml.className.includes('theme-dark')) {
-        const taskItem = document.querySelectorAll('.task-item')
-        const button = document.querySelectorAll('button')
-
-        taskItem?.forEach((el) => {
-            el.style.color = '#fff'
-        })
-        button?.forEach((el) => {
-            el.style.border = '1px solid #fff'
-        })
-    }
-}
-
-const modalDown = () => {
-    setTimeout(() => {
-        popupMood.classList.add('modal-overlay_hidden')
-    }, 300)
-}
-const modalUp = () => {
-    setTimeout(() => {
-        popupMood.classList.add('active')
-    }, 300)
+    themeRotate()
 }
 
 //modal
@@ -175,17 +178,7 @@ createTaskForm.addEventListener('submit', (e) => {
             conclusionTasks(tasks)
             spanError.classList.remove('active')
             buttonTask()
-            if(bodyHtml.className.includes('theme-dark')) {
-                const taskItem = document.querySelectorAll('.task-item')
-                const button = document.querySelectorAll('button')
-
-                taskItem?.forEach((el) => {
-                    el.style.color = '#fff'
-                })
-                button?.forEach((el) => {
-                    el.style.border = '1px solid #fff'
-                })
-            }
+            themeRotate()
         }
     } else {
         spanError.innerHTML = 'Название задачи не должно быть пустым'
@@ -197,7 +190,6 @@ createTaskForm.addEventListener('submit', (e) => {
 document.addEventListener('mouseover', (e) => {
     const {target} = e
     const getButtonClass = target.className.includes('task-item__delete-button')
-    const button = document.querySelector('.task-item__delete-button')
 
     if(getButtonClass) {
         const taskItemHtml = target.closest('.task-item')
@@ -220,7 +212,6 @@ document.addEventListener('mouseout', (e) => {
     }
 })
 
-
 // theme
 document.addEventListener('keydown', (e) => {
     const {keyCode} = e
@@ -236,7 +227,7 @@ document.addEventListener('keydown', (e) => {
         button?.forEach((el) => {
             el.style.border = '1px solid #fff'
         })
-    } else if(keyCode === 9 && bodyHtml.className.includes('theme-dark')) {
+    } else if(keyCode === 9 && bodyHtml.className.includes('theme-dark')){
         bodyHtml.classList.remove('theme-dark')
         bodyHtml.style.background = 'initial'
         taskItem?.forEach((el) => {
