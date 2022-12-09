@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="tasks">
+  <div class="tasks__wrapper">
+    <form class="create-task-block">
+      <div class="create-task-block__list">
+        <input
+                name="taskName"
+                class="create-task-block__input default-text-input"
+                type="text"
+                placeholder="Создайте новую задачу"
+        >
+        <button
+                type="submit"
+                class="create-task-block__button default-button"
+        >
+          Создать
+        </button>
+      </div>
+      <span class="error-message-block">
+        Название задачи не должно быть пустым
+      </span>
+    </form>
+    <div class="tasks-list"></div>
+  </div>
+</div>
+  <script src="index.js"></script>
+</body>
+</html>
