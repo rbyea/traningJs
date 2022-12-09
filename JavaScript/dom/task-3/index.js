@@ -31,7 +31,6 @@ createTaskForm.addEventListener('submit', (e) => {
                 pushEl = true
             }
         })
-
         if(pushEl) {
             spanError.innerHTML = 'Задача с таким названием уже существует.'
             spanError.classList.add('active')
@@ -68,8 +67,6 @@ createTaskForm.addEventListener('submit', (e) => {
         spanError.innerHTML = 'Название задачи не должно быть пустым'
         spanError.classList.add('active')
     }
-
     taskNameInput.value = ''
     taskNameInput.focus()
 })
-
