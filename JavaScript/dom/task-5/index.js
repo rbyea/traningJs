@@ -59,6 +59,17 @@ const conclusionTasks = (tasks) => {
         )
     })
     tasksList.innerHTML = task.join('')
+    if(bodyHtml.className.includes('theme-dark')) {
+        const taskItem = document.querySelectorAll('.task-item')
+        const button = document.querySelectorAll('button')
+
+        taskItem?.forEach((el) => {
+            el.style.color = '#fff'
+        })
+        button?.forEach((el) => {
+            el.style.border = '1px solid #fff'
+        })
+    }
 }
 
 const modalDown = () => {
@@ -164,7 +175,7 @@ createTaskForm.addEventListener('submit', (e) => {
             conclusionTasks(tasks)
             spanError.classList.remove('active')
             buttonTask()
-            if(bodyHtml.getAttribute('style')) {
+            if(bodyHtml.className.includes('theme-dark')) {
                 const taskItem = document.querySelectorAll('.task-item')
                 const button = document.querySelectorAll('button')
 
