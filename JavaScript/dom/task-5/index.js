@@ -41,7 +41,6 @@ const themeRotate = () => {
         })
     }
 }
-
 const createTooltip = (text) => {
     const tooltip = document.createElement('span')
     tooltip.textContent = text
@@ -215,31 +214,15 @@ document.addEventListener('mouseout', (e) => {
 // theme
 document.addEventListener('keydown', (e) => {
     const {keyCode} = e
-    const taskItem = document.querySelectorAll('.task-item')
-    const button = document.querySelectorAll('button')
-
     if(keyCode === 9 && !bodyHtml.className.includes('theme-dark')) {
-        bodyHtml.classList.add('theme-dark')
+        e.preventDefault()
+        bodyHtml.classList.toggle('theme-dark')
         bodyHtml.style.background = '#24292e'
-        taskItem?.forEach((el) => {
-          el.style.color = '#fff'
-        })
-        button?.forEach((el) => {
-            el.style.border = '1px solid #fff'
-        })
+        themeRotate()
     } else if(keyCode === 9 && bodyHtml.className.includes('theme-dark')){
-        bodyHtml.classList.remove('theme-dark')
+        e.preventDefault()
+        bodyHtml.classList.toggle('theme-dark')
         bodyHtml.style.background = 'initial'
-        taskItem?.forEach((el) => {
-            el.style.color = 'initial'
-        })
-        button?.forEach((el) => {
-            el.style.border = 'none'
-        })
+        themeRotate()
     }
 })
-
-
-
-
-
