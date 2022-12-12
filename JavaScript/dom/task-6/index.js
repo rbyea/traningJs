@@ -3,6 +3,7 @@ const options = [
     { value: 2, text: 'NodeJS' },
     { value: 3, text: 'ReactJS' },
     { value: 4, text: 'HTML' },
+    { value: 5, text: 'CSS' },
     { value: 5, text: 'CSS' }
 ];
 
