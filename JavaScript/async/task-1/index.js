@@ -1,4 +1,4 @@
-const USERS_LIST = 'https://jsonplaceholder.typicode.com/users'
+const USERS_URL = 'https://jsonplaceholder.typicode.com/users'
 
 const container = document.querySelector('#data-container')
 const loader = document.querySelector('#loader')
@@ -15,7 +15,8 @@ const createList = (name) => {
     return listLi
 }
 
-fetch(USERS_LIST)
+
+fetch(USERS_URL)
     .then((resp) => {
         if(!resp.ok) {
             throw new Error('Ошибка запроса')
