@@ -7,7 +7,8 @@ const createNewPost = async () => {
         if(!posts.ok) {
             throw new Error('Ошибка в url!')
         }
-        return await posts.json()
+        const result = await posts.json()
+        console.log(result)
     } catch (e) {
         console.error(e)
     } finally {
@@ -15,6 +16,4 @@ const createNewPost = async () => {
     }
 };
 
-createNewPost().then(result => {
-    console.log(result)
-});
+createNewPost()

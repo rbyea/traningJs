@@ -15,7 +15,10 @@ const renderAlbums = async () => {
         if(!getPhotos.ok) {
             throw new Error('Произошла ошибка в получении данных об альбомах...')
         }
-        return await getPhotos.json()
+        const result = await getPhotos.json()
+        result.forEach(el => {
+            createList(el.title)
+        })
     } catch (e) {
         list.innerHTML = e
         list.style.color = 'red'
@@ -24,8 +27,4 @@ const renderAlbums = async () => {
     }
 }
 
-renderAlbums().then(result => {
-    result.forEach(el => {
-        createList(el.title)
-    })
-})
+renderAlbums()
