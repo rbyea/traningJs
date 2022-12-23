@@ -17,23 +17,27 @@ export const createPost = (post, comments) => {
     bComments.className = 'post__comments-text'
     bComments.innerHTML = 'Комментарии'
 
+
+    const divCom = document.createElement('div')
+    divCom.className = 'post__comments'
+
+
+
     containerPosts.append(divPost)
     divPost.append(h1Post)
     divPost.append(pPost)
     divPost.append(bComments)
+    divPost.append(divCom)
 
     comments.forEach(el => {
         const postComment = `
-        <div class="post__comments">
             <div class="post-comment">
                 <span class="post-comment__author">${el.email}</span>
                 <span class="post-comment__text">
                     ${el.body}
                 </span>
-            </div>
-        </div>`
+            </div>`
 
-        console.log(postComment)
-        divPost.innerHTML += postComment
+        divCom.innerHTML += postComment
     })
 }
