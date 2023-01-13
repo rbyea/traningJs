@@ -16,34 +16,44 @@ const arrMonth = [
     'ноября',
     'декабря',
 ];
-const autoDateTest = (date) => {
-    date = new Date(date.getTime() + 1 * 1000 * 60 * 60 * 24)
-    console.log('data + 1', date)
+const autoDateTest = () => {
+    const dataYesterday = new Date
+    const date = new Date(dataYesterday.getTime() + 1 * 1000 * 60 * 60 * 24)
+    console.log('сегодняшняя дата', date)
 
     const dataM = new Date();
     const dataNewDay = new Date();
 
-    dataNewDay.setDate(date.getDate() + 8 - date.getDay())
+    dataNewDay.setDate(date.getDate() + 1 - date.getDay())
     console.log('пн будущий', dataNewDay)
+    const sb = dataM.setDate(date.getDate() + 6 - date.getDay())
+    console.log('будущая суббота',dataM)
 
-    if(date.getDay()){
-        const sb = date.setDate(date.getDate() + 6 - date.getDay())
-        console.log('будущая суббота',date)
-        if(sb >= date.getTime()) {
+    if(date.getTime() >= dataNewDay) {
 
-            // console.log(dataM)
-            // m.setDate(date.getDate() + 6 - date.getDay() + 14)
-            dataNewDay.setDate(date.getDate() + 6 - date.getDay() + 7)
-            innerDate.innerHTML = dataNewDay
+        console.log('сегодняшняя дата больше или равно будущего пн')
 
-            const dateDay = dataNewDay.getDate()
-            const dateMonth = dataNewDay.getMonth()
-            resultDay.innerHTML = dateDay
-            resultMonth.innerHTML = arrMonth[dateMonth]
-        }
+        const sbFuture = dataM.setDate(date.getDate() + 6 - date.getDay() + 7)
+
+        // console.log(dataM)
+
+        // dataNewDay.setDate(date.getDate() + 6 - date.getDay() + 7)
+
+        const dateDay = dataM.getDate()
+        const dateMonth = dataM.getMonth()
+        resultDay.innerHTML = dateDay
+        resultMonth.innerHTML = arrMonth[dateMonth]
     } else {
-        m.setDate(date.getDate() + 1)
+        console.log('сегодняшняя дата меньше или равно будущего пн')
+
+        // dataNewDay.setDate(date.getDate() + 6 - date.getDay())
+
+
+        const dateDay = dataM.getDate()
+        const dateMonth = dataM.getMonth()
+        resultDay.innerHTML = dateDay
+        resultMonth.innerHTML = arrMonth[dateMonth]
     }
 }
 
-autoDateTest(new Date, 12)
+autoDateTest()
