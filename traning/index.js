@@ -1,26 +1,35 @@
-const ordersArr = [4, 2, 1, 3];
-const people = [
-    { id: 1, name: "Максим" },
-    { id: 2, name: "Николай" },
-    { id: 3, name: "Ангелина" },
-    { id: 4, name: "Виталий" },
-];
+const CATS_URL = 'https://cataas.com/api/cats'
+const TAGS_URL = 'https://cataas.com/api/tags'
 
-const giveTalonsInOrder = (patients, orders) => {
-    const sortArr = []
-    for(let i = 0; i < orders.length; i++) {
-        for(let j = 0; j < orders.length; j++) {
-            if(orders[i] === patients[j].id) {
-                sortArr.push(patients[j])
-            }
-        }
-    }
+const img = document.querySelector('#image')
 
-    return sortArr
+const getRandomArrayElement = (array) => {
+    const randomIndex = Math.floor(Math.random() * array.length);
+    return array[randomIndex];
 }
 
-// 4 2 1 3 ==>
-// 4 2 1 3 | 4 2 1 3 | 4 2 1 3 | 4 2 1 3
+const catsPhoto = async () => {
+    try {
+        const tagsResponse = await fetch(`${TAGS_URL}`);
+        const tags = await tagsResponse.json();
+        const randomTag = getRandomArrayElement(tags);
 
-console.log(giveTalonsInOrder(people, ordersArr))
+        const responseCats = await fetch(`${CATS_URL}?tags=${randomTag}`)
+        const cats = await responseCats.json()
+        const randomCat = getRandomArrayElement(cats);
 
+        return {
+            tag: randomTag,
+            url: `https://cataas.com/api/cat/${randomCat._id}`
+        }
+    } catch (e) {
+        console.log(e)
+    } finally {
+        document.querySelector('#loader').style.display = 'none'
+    }
+}
+
+catsPhoto().then((result) => {
+    console.log(result)
+    img.src = result.url
+})
