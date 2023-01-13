@@ -1,59 +1,18 @@
-const innerDate = document.querySelector('.data');
-const resultDay = document.querySelector('.day');
-const resultMonth = document.querySelector('.month');
+const d = new Date();
+const monthNames = new Array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря');
 
-const arrMonth = [
-    'января',
-    'февраля',
-    'марта',
-    'апреля',
-    'мая',
-    'июня',
-    'июля',
-    'августа',
-    'сентября',
-    'октября',
-    'ноября',
-    'декабря',
-];
-const autoDateTest = () => {
-    const dataYesterday = new Date
-    const date = new Date(dataYesterday.getTime() + 1 * 1000 * 60 * 60 * 24)
-    console.log('сегодняшняя дата', date)
+//сегодняшняя дата
+// d.setDate();
+// console.log(d)
 
-    const dataM = new Date();
-    const dataNewDay = new Date();
+const currentHour = d.getHours();
 
-    dataNewDay.setDate(date.getDate() + 1 - date.getDay())
-    console.log('пн будущий', dataNewDay)
-    const sb = dataM.setDate(date.getDate() + 6 - date.getDay())
-    console.log('будущая суббота',dataM)
-
-    if(date.getTime() >= dataNewDay) {
-
-        console.log('сегодняшняя дата больше или равно будущего пн')
-
-        const sbFuture = dataM.setDate(date.getDate() + 6 - date.getDay() + 7)
-
-        // console.log(dataM)
-
-        // dataNewDay.setDate(date.getDate() + 6 - date.getDay() + 7)
-
-        const dateDay = dataM.getDate()
-        const dateMonth = dataM.getMonth()
-        resultDay.innerHTML = dateDay
-        resultMonth.innerHTML = arrMonth[dateMonth]
-    } else {
-        console.log('сегодняшняя дата меньше или равно будущего пн')
-
-        // dataNewDay.setDate(date.getDate() + 6 - date.getDay())
-
-
-        const dateDay = dataM.getDate()
-        const dateMonth = dataM.getMonth()
-        resultDay.innerHTML = dateDay
-        resultMonth.innerHTML = arrMonth[dateMonth]
-    }
+if(currentHour > 1) {
+    console.log(true)
+    d.setDate(d.getDate() + (6 + 7 - d.getDay()) % 14);
+} else {
+    console.log(false)
+    d.setDate(d.getDate() + (5-d.getDay())%5+1);
 }
 
-autoDateTest()
+console.log(d.getDate() + ' - ' + monthNames[d.getMonth()]);
