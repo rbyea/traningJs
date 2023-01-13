@@ -2,12 +2,14 @@ const d = new Date();
 const monthNames = new Array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря');
 
 //сегодняшняя дата
-// d.setDate();
+d.setDate(22);
+d.setHours(23)
+d.setMinutes(59)
 // console.log(d)
 
 const currentHour = d.getHours();
 
-if(currentHour > 1) {
+if(currentHour > 1 || currentHour <= 1) {
     console.log(true)
     d.setDate(d.getDate() + (6 + 7 - d.getDay()) % 14);
 } else {
