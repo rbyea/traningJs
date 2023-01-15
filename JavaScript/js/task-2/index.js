@@ -1,25 +1,14 @@
-// isEqualSymbols('адрес', 'среда')// true
-isEqualSymbols('ноутбук', 'программист')// false
+console.log(isEqualSymbols('адрес', 'среда'))// true
+console.log(isEqualSymbols('ноутбук', 'программист'))// false
 
 function isEqualSymbols(str1, str2) {
-    let letters1 = [];
-    let letters2 = [];
-
-    for (let k = 0; k < str1.length;k++) {
-        letters1.push(str1[k])
-    }
-    for (let j = 0; j < str2.length;j++) {
-        letters2.push(str2[j])
+    if(str1.length !== str2.length) {
+        return false
     }
 
-    letters1.forEach((el,index) => {
-        letters2.forEach(letter => {
-            if(el.includes(letter)) {
-                console.log('letter: ', el, true)
-            } else {
-                console.log('letter: ', el, false)
-            }
-        })
-    })
+    if(str1.split('').sort().join('') === str2.split('').sort().join('')) {
+        return true
+    }
 
+    return false
 }
