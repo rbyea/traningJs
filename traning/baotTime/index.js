@@ -2,7 +2,6 @@ const d = new Date();
 const monthNames = new Array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря');
 
 //сегодняшняя дата
-d.setDate(22);
 d.setHours(23)
 d.setMinutes(59)
 // console.log(d)
