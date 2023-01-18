@@ -41,3 +41,6 @@ export class Donations {
         this.#container.append(div)
     }
 }
+
+
+console.log(true)
