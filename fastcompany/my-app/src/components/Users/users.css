@@ -1,0 +1,13 @@
+.btn-badge {
+  pointer-events: none;
+  height: 26px;
+  text-transform: initial !important;
+}
+
+.table-head th {
+  font-weight: 600;
+}
+
+.box-active {
+  background-color: rgb(244, 67, 54) !important;
+}
