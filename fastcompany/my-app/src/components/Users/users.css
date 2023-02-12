@@ -1,6 +1,6 @@
 .btn-badge {
-  pointer-events: none;
   height: 26px;
+  cursor: default !important;
   text-transform: initial !important;
 }
 
