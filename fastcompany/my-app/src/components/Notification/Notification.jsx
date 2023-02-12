@@ -8,11 +8,10 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 const Notification = (props) => {
-  let booleanRotate = props.openAlertf
-
+  console.log(props);
   return (
     <Snackbar
-      open={booleanRotate}
+      open={props.openAlert}
       autoHideDuration={1500}
       onClose={props.handleCloseAlert}
     >

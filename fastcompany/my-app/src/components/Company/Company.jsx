@@ -33,8 +33,6 @@ const Company = () => {
   }
 
   const handleBookmark = (index) => {
-
-    console.log(index);
     const newBoolenBookmark = users.map((users) => {
       if(users._id === index) {
         return {...users, bookmark: !users.bookmark}
