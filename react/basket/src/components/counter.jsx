@@ -13,7 +13,7 @@ const Counter = (props) => {
       <div>{props.name}</div>
       <div className={`button-value ${valueClassName}`}>{valueVisible}</div>
       <Button onClick={() => props.onIncrementCount(props.id)} variant="contained">+</Button>
-      <Button onClick={() => props.onDecrementCount(props.id)} className={`visible ${valueClassName}`} variant="contained">-</Button>
+      <Button onClick={() => props.onDecrementCount(props.id)} disabled={props.value === 0 ? true : false} variant="contained">-</Button>
       <Button  variant="contained" onClick={() => props.onDelete(props.id)} color="error">Удалить</Button>
     </Stack>
   )
