@@ -9,10 +9,23 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const Notification = (props) => {
   const {userName, booleanBookmark, openAlertNotification} = props
-  
-  console.log(!booleanBookmark);
 
-  console.log(userName);
+  const [textAlert, setTextAlert] = React.useState('')
+
+
+  React.useEffect(() => {
+    if(openAlertNotification === 'boolean') {
+      if(booleanBookmark) {
+        setTextAlert(`${userName} удален с избранного`)
+      } else {
+        setTextAlert(`${userName} добавлен в избранное`)
+      }
+    }
+  }, [openAlertNotification, booleanBookmark, userName])
+
+
+
+  console.log(textAlert);
 
   return (
     <Snackbar
@@ -23,8 +36,8 @@ const Notification = (props) => {
       <Alert severity={!booleanBookmark === true ? 'success' : !booleanBookmark === 0 ? 'success' : 'error'} sx={{ width: '100%' }}>
         {
           openAlertNotification === 0 ? `${userName} удален` :
-          openAlertNotification === true ? `${userName} добавлен в избранное` :
-          `${userName} удален с избранного`
+          openAlertNotification === true ? textAlert :
+          textAlert
         }
       </Alert>
     </Snackbar>

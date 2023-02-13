@@ -48,7 +48,7 @@ const Company = () => {
     setUserName(name)
     setBooleanBookmark(boolean)
     setUsers(newBoolenBookmark)
-    setOpenAlertNotification(index)
+    setOpenAlertNotification('boolean')
     setOpenAlert(true)
   }
 
