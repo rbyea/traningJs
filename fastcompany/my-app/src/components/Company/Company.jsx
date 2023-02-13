@@ -18,10 +18,12 @@ const Company = () => {
   const getUsers = api.users.fetchAll()
   const [users, setUsers] = React.useState(getUsers)
   const [openAlert, setOpenAlert] = React.useState(false)
+  const [openAlertNotification, setOpenAlertNotification] = React.useState(0)
 
-  const handleDelete = (userId) => {
+  const handleDelete = (userId, boolean) => {
     setUsers(users.filter(el => el._id !== userId))
     setOpenAlert(true)
+    setOpenAlertNotification(0)
   }
 
   const handleCloseAlert = (e, reason) => {
@@ -41,12 +43,14 @@ const Company = () => {
     })
 
     setUsers(newBoolenBookmark)
+    setOpenAlertNotification(!openAlertNotification)
+    setOpenAlert(true)
   }
 
   return (
     <section className="section section_default table">
       <div className="wrapper wrapper_large">
-        <Notification handleCloseAlert={handleCloseAlert} openAlert={openAlert}/>
+        <Notification  openAlertNotification={openAlertNotification}  handleCloseAlert={handleCloseAlert} openAlert={openAlert}/>
         <Status users={users}/>
         {
           users.length > 0 &&
