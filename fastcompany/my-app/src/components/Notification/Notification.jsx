@@ -33,7 +33,7 @@ const Notification = (props) => {
       autoHideDuration={1000}
       onClose={props.handleCloseAlert}
     >
-      <Alert severity={bgColor === 'success' ? bgColor : bgColor} sx={{ width: '100%' }}>
+      <Alert severity={bgColor} sx={{ width: '100%' }}>
         {
           openAlertNotification === 0 ? `${userName} удален` :
           openAlertNotification === true ? textAlert :
