@@ -29,9 +29,9 @@ const Users = (props) => {
         <TableCell align="center">{props.profession.name}</TableCell>
         <TableCell align="center">{props.completedMeetings}</TableCell>
         <TableCell align="center">{props.rate}</TableCell>
-        <TableCell align="center"><Bookmark id={props._id} openAlertNotification={props.openAlertNotification}  handleBookmark={props.handleBookmark} boolean={props.bookmark}/></TableCell>
+        <TableCell align="center"><Bookmark id={props._id} name={props.name} openAlertNotification={props.openAlertNotification}  handleBookmark={props.handleBookmark} boolean={props.bookmark}/></TableCell>
         <TableCell align="center">
-          <Button variant="contained" onClick={() => props.handleDelete(props._id)} color="error">
+          <Button variant="contained" onClick={() => props.handleDelete(props._id, props.name)} color="error">
             Удалить
           </Button>
         </TableCell>

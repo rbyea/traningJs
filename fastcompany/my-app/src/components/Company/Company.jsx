@@ -19,11 +19,14 @@ const Company = () => {
   const [users, setUsers] = React.useState(getUsers)
   const [openAlert, setOpenAlert] = React.useState(false)
   const [openAlertNotification, setOpenAlertNotification] = React.useState(0)
+  const [booleanBookmark, setBooleanBookmark] = React.useState(false)
+  const [userName, setUserName] = React.useState('')
 
-  const handleDelete = (userId, boolean) => {
+  const handleDelete = (userId,name) => {
     setUsers(users.filter(el => el._id !== userId))
     setOpenAlert(true)
     setOpenAlertNotification(0)
+    setUserName(name)
   }
 
   const handleCloseAlert = (e, reason) => {
@@ -34,7 +37,7 @@ const Company = () => {
     setOpenAlert(false)
   }
 
-  const handleBookmark = (index) => {
+  const handleBookmark = (index, name,boolean) => {
     const newBoolenBookmark = users.map((users) => {
       if(users._id === index) {
         return {...users, bookmark: !users.bookmark}
@@ -42,15 +45,17 @@ const Company = () => {
       return users
     })
 
+    setUserName(name)
+    setBooleanBookmark(boolean)
     setUsers(newBoolenBookmark)
-    setOpenAlertNotification(!openAlertNotification)
+    setOpenAlertNotification(index)
     setOpenAlert(true)
   }
 
   return (
     <section className="section section_default table">
       <div className="wrapper wrapper_large">
-        <Notification  openAlertNotification={openAlertNotification}  handleCloseAlert={handleCloseAlert} openAlert={openAlert}/>
+        <Notification userName={userName} openAlertNotification={openAlertNotification} booleanBookmark={booleanBookmark} handleCloseAlert={handleCloseAlert} openAlert={openAlert}/>
         <Status users={users}/>
         {
           users.length > 0 &&
