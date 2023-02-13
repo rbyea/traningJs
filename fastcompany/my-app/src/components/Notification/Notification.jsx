@@ -11,29 +11,29 @@ const Notification = (props) => {
   const {userName, booleanBookmark, openAlertNotification} = props
 
   const [textAlert, setTextAlert] = React.useState('')
-
+  const [bgColor, setBgColor] = React.useState('success')
 
   React.useEffect(() => {
     if(openAlertNotification === 'boolean') {
       if(booleanBookmark) {
         setTextAlert(`${userName} удален с избранного`)
+        setBgColor('error')
       } else {
         setTextAlert(`${userName} добавлен в избранное`)
+        setBgColor('success')
       }
+    } else {
+      setBgColor('error')
     }
   }, [openAlertNotification, booleanBookmark, userName])
-
-
-
-  console.log(textAlert);
 
   return (
     <Snackbar
       open={props.openAlert}
-      autoHideDuration={1500}
+      autoHideDuration={1000}
       onClose={props.handleCloseAlert}
     >
-      <Alert severity={!booleanBookmark === true ? 'success' : !booleanBookmark === 0 ? 'success' : 'error'} sx={{ width: '100%' }}>
+      <Alert severity={bgColor === 'success' ? bgColor : bgColor} sx={{ width: '100%' }}>
         {
           openAlertNotification === 0 ? `${userName} удален` :
           openAlertNotification === true ? textAlert :
