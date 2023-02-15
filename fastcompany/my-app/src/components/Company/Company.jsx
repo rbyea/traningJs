@@ -1,4 +1,5 @@
 import React from 'react'
+
 import api from '../../api';
 
 import Table from '@mui/material/Table';
@@ -8,10 +9,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Pagination from '@mui/material/Pagination';
 
 import Users from '../Users/Users'
 import Notification from '../Notification/Notification';
 import Status from '../Status/Status';
+import { paginate } from '../../utils/utils';
 
 const Company = () => {
 
@@ -21,6 +24,7 @@ const Company = () => {
   const [openAlertNotification, setOpenAlertNotification] = React.useState(0)
   const [booleanBookmark, setBooleanBookmark] = React.useState(false)
   const [userName, setUserName] = React.useState('')
+  const [dataPage, setDataPage] = React.useState(1);
 
   const handleDelete = (userId,name) => {
     setUsers(users.filter(el => el._id !== userId))
@@ -51,6 +55,16 @@ const Company = () => {
     setOpenAlertNotification('boolean')
     setOpenAlert(true)
   }
+
+  const usersLength = users.length
+  const countUser = 5
+  const pages = Math.ceil(usersLength / countUser)
+
+  const onDataPageChange = (event, page) =>{
+    setDataPage(page)
+  };
+
+  const userCrop = paginate(users, dataPage, countUser)
 
   return (
     <section className="section section_default table">
@@ -89,7 +103,7 @@ const Company = () => {
                   </TableHead>
                   <TableBody>
                     {
-                      users.map(user => (
+                      userCrop.map(user => (
                         <Users key={user._id} handleBookmark={handleBookmark} handleDelete={handleDelete} {...user}/>
                       ))
                     }
@@ -97,7 +111,12 @@ const Company = () => {
                 </Table>
               </TableContainer>
             </Paper>
-        }   
+        }
+
+        {
+          usersLength > 0 &&
+          <Pagination className="pagination" count={pages} onChange={onDataPageChange} variant="outlined" shape="rounded" />
+        }
       </div>
     </section>
   )
