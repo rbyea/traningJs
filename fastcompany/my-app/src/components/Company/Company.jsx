@@ -1,125 +1,137 @@
-import React from 'react'
+import React from "react";
 
-import api from '../../api';
+import api from "../../api";
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Pagination from '@mui/material/Pagination';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Pagination from "@mui/material/Pagination";
 
-import Users from '../Users/Users'
-import Notification from '../Notification/Notification';
-import Status from '../Status/Status';
-import { paginate } from '../../utils/utils';
+import Users from "../Users/Users";
+import Notification from "../Notification/Notification";
+import Status from "../Status/Status";
+import { paginate } from "../../utils/utils";
 
 const Company = () => {
-
-  const getUsers = api.users.fetchAll()
-  const [users, setUsers] = React.useState(getUsers)
-  const [openAlert, setOpenAlert] = React.useState(false)
-  const [openAlertNotification, setOpenAlertNotification] = React.useState(0)
-  const [booleanBookmark, setBooleanBookmark] = React.useState(false)
-  const [userName, setUserName] = React.useState('')
+  const getUsers = api.users.fetchAll();
+  const [users, setUsers] = React.useState(getUsers);
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const [openAlertNotification, setOpenAlertNotification] = React.useState(0);
+  const [booleanBookmark, setBooleanBookmark] = React.useState(false);
+  const [userName, setUserName] = React.useState("");
   const [dataPage, setDataPage] = React.useState(1);
 
-  const handleDelete = (userId,name) => {
-    setUsers(users.filter(el => el._id !== userId))
-    setOpenAlert(true)
-    setOpenAlertNotification(0)
-    setUserName(name)
-  }
+  const handleDelete = (userId, name) => {
+    setUsers(users.filter((el) => el._id !== userId));
+    setOpenAlert(true);
+    setOpenAlertNotification(0);
+    setUserName(name);
+  };
 
   const handleCloseAlert = (e, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
-    setOpenAlert(false)
-  }
-
-  const handleBookmark = (index, name,boolean) => {
-    const newBoolenBookmark = users.map((users) => {
-      if(users._id === index) {
-        return {...users, bookmark: !users.bookmark}
-      }
-      return users
-    })
-
-    setUserName(name)
-    setBooleanBookmark(boolean)
-    setUsers(newBoolenBookmark)
-    setOpenAlertNotification('boolean')
-    setOpenAlert(true)
-  }
-
-  const usersLength = users.length
-  const countUser = 5
-  const pages = Math.ceil(usersLength / countUser)
-
-  const onDataPageChange = (event, page) =>{
-    setDataPage(page)
+    setOpenAlert(false);
   };
 
-  const userCrop = paginate(users, dataPage, countUser)
+  const handleBookmark = (index, name, boolean) => {
+    const newBoolenBookmark = users.map((users) => {
+      if (users._id === index) {
+        return { ...users, bookmark: !users.bookmark };
+      }
+      return users;
+    });
+
+    setUserName(name);
+    setBooleanBookmark(boolean);
+    setUsers(newBoolenBookmark);
+    setOpenAlertNotification("boolean");
+    setOpenAlert(true);
+  };
+
+  const usersLength = users.length;
+  const countUser = 5;
+  const pages = Math.ceil(usersLength / countUser);
+
+  const onDataPageChange = (event, page) => {
+    setDataPage(page);
+  };
+
+  const userCrop = paginate(users, dataPage, countUser);
 
   return (
     <section className="section section_default table">
       <div className="wrapper wrapper_large">
-        <Notification userName={userName} openAlertNotification={openAlertNotification} booleanBookmark={booleanBookmark} handleCloseAlert={handleCloseAlert} openAlert={openAlert}/>
-        <Status users={users}/>
-        {
-          users.length > 0 &&
-            <Paper sx={{ width: '100%' }}>
-              <TableContainer sx={
-                { 
-                  maxHeight: 'calc(100vh - 141px)',
-                  "&::-webkit-scrollbar": {
-                    width: 7
-                  },
-                  "&::-webkit-scrollbar-track": {
-                    backgroundColor: "#ffffff"
-                  },
-                  "&::-webkit-scrollbar-thumb": {
-                    backgroundColor: "#DFDFDF",
-                    borderRadius: 2,
-                  }
+        <Notification
+          userName={userName}
+          openAlertNotification={openAlertNotification}
+          booleanBookmark={booleanBookmark}
+          handleCloseAlert={handleCloseAlert}
+          openAlert={openAlert}
+        />
+        <Status users={users} />
+        {users.length > 0 && (
+          <Paper sx={{ width: "100%" }}>
+            <TableContainer
+              sx={{
+                maxHeight: "calc(100vh - 141px)",
+                "&::-webkit-scrollbar": {
+                  width: 7
+                },
+                "&::-webkit-scrollbar-track": {
+                  backgroundColor: "#ffffff"
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  backgroundColor: "#DFDFDF",
+                  borderRadius: 2
                 }
-              }>
-                <Table stickyHeader aria-label="sticky table">
-                  <TableHead>
-                    <TableRow className="table-head">
-                      <TableCell>Имя</TableCell>
-                      <TableCell align="left">Качество</TableCell>
-                      <TableCell align="center">Профессия</TableCell>
-                      <TableCell align="center">Количество встреч</TableCell>
-                      <TableCell align="center">Оценка</TableCell>
-                      <TableCell align="center">Избранное</TableCell>
-                      <TableCell align="center"></TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {
-                      userCrop.map(user => (
-                        <Users key={user._id} handleBookmark={handleBookmark} handleDelete={handleDelete} {...user}/>
-                      ))
-                    }
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Paper>
-        }
+              }}
+            >
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow className="table-head">
+                    <TableCell>Имя</TableCell>
+                    <TableCell align="left">Качество</TableCell>
+                    <TableCell align="center">Профессия</TableCell>
+                    <TableCell align="center">Количество встреч</TableCell>
+                    <TableCell align="center">Оценка</TableCell>
+                    <TableCell align="center">Избранное</TableCell>
+                    <TableCell align="center"></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {userCrop.map((user) => (
+                    <Users
+                      key={user._id}
+                      handleBookmark={handleBookmark}
+                      handleDelete={handleDelete}
+                      {...user}
+                    />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+        )}
 
-        {
-          usersLength > 0 &&
-          <Pagination className="pagination" count={pages} onChange={onDataPageChange} variant="outlined" shape="rounded" />
-        }
+        {usersLength > 0 && (
+          <Pagination
+            className="pagination"
+            count={pages}
+            onChange={onDataPageChange}
+            variant="outlined"
+            shape="rounded"
+          />
+        )}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Company
+export default Company;

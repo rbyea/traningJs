@@ -1,36 +1,41 @@
-import React from 'react'
+import React from "react";
 
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Button from '@mui/material/Button';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import PropTypes from "prop-types";
 
-const Qualitie = (props) => {
-
+const Qualitie = ({ _id, color, name }) => {
   const theme = createTheme({
     palette: {
       dark: {
-        main: '#000',
-        contrastText: '#fff',
+        main: "#000",
+        contrastText: "#fff"
       },
       danger: {
-        main: 'rgb(244, 67, 54)',
-        contrastText: '#fff',
+        main: "rgb(244, 67, 54)",
+        contrastText: "#fff"
       },
       info: {
-        main: '#705013',
-        contrastText: '#fff',
-      },
-    },
+        main: "#705013",
+        contrastText: "#fff"
+      }
+    }
   });
 
   return (
-    <ThemeProvider  key={props._id} theme={theme}>
-      <Button className="btn-badge" variant="contained" color={
-        props.color  
-      }>
-        {props.name}
-      </Button>
-    </ThemeProvider>
-  )
-}
+    <>
+      <ThemeProvider key={_id} theme={theme}>
+        <Button className="btn-badge" variant="contained" color={color}>
+          {name}
+        </Button>
+      </ThemeProvider>
+    </>
+  );
+};
+Qualitie.propTypes = {
+  _id: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};
 
-export default Qualitie
+export default Qualitie;

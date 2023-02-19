@@ -1,10 +1,8 @@
-import React from 'react'
-import Company from './components/Company/Company';
+import React from "react";
+import Company from "./components/Company/Company";
 
 const App = () => {
-  return (
-    <Company />
-  )
-}
+  return <Company />;
+};
 
-export default App
+export default App;

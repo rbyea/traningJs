@@ -1,17 +1,30 @@
-import React from 'react'
-import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+import React from "react";
+import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
+import PropTypes from "prop-types";
 
-const Boockmark = ({...props}) => {
-
-  const {boolean, handleBookmark, id, name} = props
-
+const Boockmark = ({ boolean, handleBookmark, id, name }) => {
   const style = {
-    cursor: 'pointer'
-  }
+    cursor: "pointer"
+  };
 
   return (
-      <BookmarkAddedIcon style={style} onClick={() => {handleBookmark(id, name, boolean)}} color={boolean === true ? 'primary' : 'disabled'}/>
-  )
-}
+    <>
+      <BookmarkAddedIcon
+        style={style}
+        onClick={() => {
+          handleBookmark(id, name, boolean);
+        }}
+        color={boolean === true ? "primary" : "disabled"}
+      />
+    </>
+  );
+};
 
-export default Boockmark
+Boockmark.propTypes = {
+  boolean: PropTypes.bool.isRequired,
+  handleBookmark: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};
+
+export default Boockmark;
