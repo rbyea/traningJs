@@ -8,12 +8,18 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const Notification = ({ userName, booleanBookmark, openAlertNotification, openAlert, handleCloseAlert }) => {
+const Notification = ({
+  userName,
+  booleanBookmark,
+  openAlertNotification,
+  openAlert,
+  handleCloseAlert,
+}) => {
   const [textAlert, setTextAlert] = React.useState("");
   const [bgColor, setBgColor] = React.useState("success");
 
   React.useEffect(() => {
-    if (openAlertNotification === "boolean") {
+    if (openAlertNotification === 3) {
       if (booleanBookmark) {
         setTextAlert(`${userName} удален с избранного`);
         setBgColor("error");
@@ -47,7 +53,7 @@ Notification.propTypes = {
   booleanBookmark: PropTypes.bool.isRequired,
   openAlertNotification: PropTypes.number.isRequired,
   openAlert: PropTypes.bool.isRequired,
-  handleCloseAlert: PropTypes.func.isRequired
+  handleCloseAlert: PropTypes.func.isRequired,
 };
 
 export default Notification;

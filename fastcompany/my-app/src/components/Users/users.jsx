@@ -11,7 +11,17 @@ import Bookmark from "../Bookmark/Bookmark";
 
 import PropTypes from "prop-types";
 
-const Users = ({ _id, name, qualities, profession, completedMeetings, rate, handleBookmark, bookmark, handleDelete }) => {
+const Users = ({
+  _id,
+  name,
+  qualities,
+  profession,
+  completedMeetings,
+  rate,
+  handleBookmark,
+  bookmark,
+  handleDelete,
+}) => {
   return (
     <>
       <TableRow
@@ -62,7 +72,7 @@ Users.propTypes = {
   rate: PropTypes.number.isRequired,
   handleBookmark: PropTypes.func.isRequired,
   bookmark: PropTypes.bool.isRequired,
-  handleDelete: PropTypes.func.isRequired
+  handleDelete: PropTypes.func.isRequired,
 };
 
 export default Users;

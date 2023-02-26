@@ -9,17 +9,17 @@ const Qualitie = ({ _id, color, name }) => {
     palette: {
       dark: {
         main: "#000",
-        contrastText: "#fff"
+        contrastText: "#fff",
       },
       danger: {
         main: "rgb(244, 67, 54)",
-        contrastText: "#fff"
+        contrastText: "#fff",
       },
       info: {
         main: "#705013",
-        contrastText: "#fff"
-      }
-    }
+        contrastText: "#fff",
+      },
+    },
   });
 
   return (
@@ -35,7 +35,7 @@ const Qualitie = ({ _id, color, name }) => {
 Qualitie.propTypes = {
   _id: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
 };
 
 export default Qualitie;

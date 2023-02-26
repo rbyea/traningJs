@@ -1,0 +1,37 @@
+.section-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dark {
+    background-color: #263238;
+}
+
+.dark th {
+    background-color: #263238;
+    color: #fff;
+}
+.dark td {
+    background-color: #263238;
+    color: #fff;
+}
+
+.dark .MuiButtonBase-root {
+    color: #fff;
+    border-color: #fff;
+}
+
+.table {
+    height: 100vh;
+}
+
+.dark .css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    background-color: #fff;
+    color: #263238;
+}
+
+.dark .css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover {
+    background-color: #fff;
+    color: #263238;
+}

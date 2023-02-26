@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const Boockmark = ({ boolean, handleBookmark, id, name }) => {
   const style = {
-    cursor: "pointer"
+    cursor: "pointer",
   };
 
   return (
@@ -14,7 +14,7 @@ const Boockmark = ({ boolean, handleBookmark, id, name }) => {
         onClick={() => {
           handleBookmark(id, name, boolean);
         }}
-        color={boolean === true ? "primary" : "disabled"}
+        color={boolean === true ? "primary" : "#616161"}
       />
     </>
   );
@@ -24,7 +24,7 @@ Boockmark.propTypes = {
   boolean: PropTypes.bool.isRequired,
   handleBookmark: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
 };
 
 export default Boockmark;
