@@ -23,6 +23,7 @@
 
 .table-clear th{
     padding: 16px 0;
+    font-weight: 400;
 }
 
 .dark .MuiButtonBase-root {
