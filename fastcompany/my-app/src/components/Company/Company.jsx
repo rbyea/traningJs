@@ -28,6 +28,8 @@ const Company = ({ setOpenAlert, users, handleDelete, handleBookmark, openAlert,
     api.professions.fetchAll().then(data => setProffessions(data));
   });
 
+  console.log(123);
+
   const [selectedProff, setSelectedProff] = React.useState();
   const [dataPage, setDataPage] = React.useState(1);
   const [mode, setMode] = React.useState(true);
