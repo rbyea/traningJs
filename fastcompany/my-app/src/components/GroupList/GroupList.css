@@ -1,0 +1,8 @@
+.button-list {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.button-list button {
+  flex: 1;
+}

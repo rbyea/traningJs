@@ -17,6 +17,14 @@
     color: #fff;
 }
 
+.dark table {
+    background-color: #263238;
+}
+
+.table-clear th{
+    padding: 16px 0;
+}
+
 .dark .MuiButtonBase-root {
     color: #fff;
     border-color: #fff;

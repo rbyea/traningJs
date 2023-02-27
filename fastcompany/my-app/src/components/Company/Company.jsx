@@ -17,28 +17,41 @@ import Notification from "../Notification/Notification";
 import Status from "../Status/Status";
 import { paginate } from "../../utils/utils";
 import "./Company.css";
+import GroupList from "../GroupList/GroupList";
 
-const Company = () => {
-  const getUsers = api.users.fetchAll();
-  const [proffessions, setProffessions] = React.useState(api.professions.fetchAll());
+import PropTypes from "prop-types";
 
-  const [users, setUsers] = React.useState(getUsers);
-  const [openAlert, setOpenAlert] = React.useState(false);
-  const [openAlertNotification, setOpenAlertNotification] = React.useState(0);
-  const [booleanBookmark, setBooleanBookmark] = React.useState(false);
-  const [userName, setUserName] = React.useState("");
+const Company = ({ setOpenAlert, users, handleDelete, handleBookmark, openAlert, booleanBookmark, openAlertNotification, userName }) => {
+  const [proffessions, setProffessions] = React.useState([]);
+  const resetFilter = [{name: "Сбросить фильтр"}];
+  React.useEffect(() => {
+    api.professions.fetchAll().then(data => setProffessions(data));
+  });
+
+  const [selectedProff, setSelectedProff] = React.useState();
   const [dataPage, setDataPage] = React.useState(1);
   const [mode, setMode] = React.useState(true);
-
-  const handleDelete = (userId, name) => {
-    setUsers(users.filter((el) => el._id !== userId));
-    setOpenAlert(true);
-    setOpenAlertNotification(0);
-    setUserName(name);
-  };
+  const [indexListBtn, setIndexListBtn] = React.useState({});
 
   const handleTheme = () => {
     setMode(!mode);
+  };
+  const filteredUsers = selectedProff ? users.filter((user) => JSON.stringify(user.profession) === JSON.stringify(selectedProff)) : users;
+
+  const usersLength = filteredUsers.length;
+  const countUser = 5;
+  const pages = Math.ceil(usersLength / countUser);
+
+  const onDataPageChange = (event, page) => {
+    setDataPage(page);
+  };
+
+  const userCrop = paginate(filteredUsers, dataPage, countUser);
+
+  const onHandlerBtnList = (params) => {
+    setIndexListBtn(params);
+    setDataPage(1);
+    setSelectedProff(params);
   };
 
   const handleCloseAlert = (e, reason) => {
@@ -49,30 +62,10 @@ const Company = () => {
     setOpenAlert(false);
   };
 
-  const handleBookmark = (index, name, boolean) => {
-    const newBoolenBookmark = users.map((users) => {
-      if (users._id === index) {
-        return { ...users, bookmark: !users.bookmark };
-      }
-      return users;
-    });
-
-    setUserName(name);
-    setBooleanBookmark(boolean);
-    setUsers(newBoolenBookmark);
-    setOpenAlertNotification(3);
-    setOpenAlert(true);
+  const handleClearFilter = () => {
+    setSelectedProff();
+    setIndexListBtn({});
   };
-
-  const usersLength = users.length;
-  const countUser = 5;
-  const pages = Math.ceil(usersLength / countUser);
-
-  const onDataPageChange = (event, page) => {
-    setDataPage(page);
-  };
-
-  const userCrop = paginate(users, dataPage, countUser);
 
   return (
     <section className={mode === false ? "section section_default table" : "section section_default table dark" }>
@@ -86,15 +79,17 @@ const Company = () => {
         />
 
         <div className="section-wrap">
-          <Status proffessions={proffessions} users={users} mode={mode}/>
+          <Status users={filteredUsers} mode={mode}/>
           <ThemeDark mode={mode} onHandleTheme={handleTheme}/>
         </div>
 
-        {users.length > 0 && (
+        <GroupList handleClearFilter={handleClearFilter} indexListBtn={indexListBtn} onHandlerBtnList={onHandlerBtnList} proffessions={proffessions}/>
+
+        {users &&
           <Paper sx={{ width: "100%" }}>
             <TableContainer
               sx={{
-                maxHeight: "calc(100vh - 193px)",
+                maxHeight: "calc(100vh - 277px)",
                 "&::-webkit-scrollbar": {
                   width: 7,
                 },
@@ -120,32 +115,50 @@ const Company = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {userCrop.map((user) => (
-                    <Users
-                      key={user._id}
-                      handleBookmark={handleBookmark}
-                      handleDelete={handleDelete}
-                      {...user}
-                    />
-                  ))}
+                  {
+                    users && filteredUsers.length >= 1 ?
+                      userCrop.map((user) => (
+                        <Users
+                          key={user._id}
+                          handleBookmark={handleBookmark}
+                          handleDelete={handleDelete}
+                          {...user}
+                        />
+                      ))
+                      : <tr className="table-clear"><th>Человек с профессией {indexListBtn ? <strong>{indexListBtn.name}</strong> : ""} отсутсвует</th></tr>
+                       
+                  }
                 </TableBody>
               </Table>
             </TableContainer>
           </Paper>
-        )}
+        }
 
-        {usersLength > 0 && (
+        { usersLength > 0 && pages > 1 ?
           <Pagination
             className="pagination"
             count={pages}
+            page={dataPage}
             onChange={onDataPageChange}
             variant="outlined"
             shape="rounded"
           />
-        )}
+          : <></>
+        }
       </div>
     </section>
   );
+};
+
+Company.propTypes = {
+  users: PropTypes.array,
+  handleBookmark: PropTypes.func,
+  handleDelete: PropTypes.func,
+  userName: PropTypes.string,
+  openAlert: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  booleanBookmark: PropTypes.bool,
+  openAlertNotification: PropTypes.number,
+  setOpenAlert: PropTypes.func
 };
 
 export default Company;
