@@ -32,15 +32,23 @@ const App = () => {
     setOpenAlert(true);
   };
 
-
-  React.useState(() => {
+  React.useEffect(() => {
     api.users.fetchAll().then((data) => setUsers(data));
   });
 
   return (
     <>
       {users && (
-        <Company setOpenAlert={setOpenAlert} booleanBookmark={booleanBookmark} openAlertNotification={openAlertNotification} openAlert={openAlert} userName={userName} users={users} handleBookmark={handleBookmark} handleDelete={handleDelete}/>
+        <Company 
+          setOpenAlert={setOpenAlert}
+          booleanBookmark={booleanBookmark}
+          openAlertNotification={openAlertNotification}
+          openAlert={openAlert}
+          userName={userName}
+          users={users}
+          handleBookmark={handleBookmark}
+          handleDelete={handleDelete}
+        />
       )}
     </>
   );

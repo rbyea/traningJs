@@ -3,8 +3,6 @@ import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 
 const Status = ({ users }) => {
-  const dancePeople = `${users.length} человек тусанет с тобой сегодня`;
-
   const convertEnding = (number) => {
     if (number === 0) {
       return "Никто с тобой не тусанет";

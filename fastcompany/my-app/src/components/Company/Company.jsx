@@ -2,13 +2,6 @@ import React from "react";
 
 import api from "../../api";
 
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import Pagination from "@mui/material/Pagination";
 
 import ThemeDark from "../Theme/Theme";
@@ -20,10 +13,21 @@ import "./Company.css";
 import GroupList from "../GroupList/GroupList";
 
 import PropTypes from "prop-types";
+import _ from "lodash";
+import GTable from "../Table/GTable";
 
-const Company = ({ setOpenAlert, users, handleDelete, handleBookmark, openAlert, booleanBookmark, openAlertNotification, userName }) => {
+const Company = ({ 
+  setOpenAlert,
+  users,
+  handleDelete,
+  handleBookmark,
+  openAlert,
+  booleanBookmark,
+  openAlertNotification,
+  userName
+}) => {
+
   const [proffessions, setProffessions] = React.useState([]);
-  const resetFilter = [{name: "Сбросить фильтр"}];
   React.useEffect(() => {
     api.professions.fetchAll().then(data => setProffessions(data));
   });
@@ -46,7 +50,15 @@ const Company = ({ setOpenAlert, users, handleDelete, handleBookmark, openAlert,
     setDataPage(page);
   };
 
-  const userCrop = paginate(filteredUsers, dataPage, countUser);
+  const [sortBy, setSortBy] = React.useState({iter: "name", order: "asc"});
+
+  const handleHeadSort = (item) => {
+    setSortBy(item);
+  };
+
+  const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
+
+  const userCrop = paginate(sortedUsers, dataPage, countUser);
 
   const onHandlerBtnList = (params) => {
     setIndexListBtn(params);
@@ -58,7 +70,6 @@ const Company = ({ setOpenAlert, users, handleDelete, handleBookmark, openAlert,
     if (reason === "clickaway") {
       return;
     }
-
     setOpenAlert(false);
   };
 
@@ -83,67 +94,36 @@ const Company = ({ setOpenAlert, users, handleDelete, handleBookmark, openAlert,
           <ThemeDark mode={mode} onHandleTheme={handleTheme}/>
         </div>
 
-        <GroupList handleClearFilter={handleClearFilter} indexListBtn={indexListBtn} onHandlerBtnList={onHandlerBtnList} proffessions={proffessions}/>
+        <GroupList 
+          handleClearFilter={handleClearFilter}
+          indexListBtn={indexListBtn}
+          onHandlerBtnList={onHandlerBtnList}
+          proffessions={proffessions}
+        />
 
         {users &&
-          <Paper sx={{ width: "100%" }}>
-            <TableContainer
-              sx={{
-                maxHeight: "calc(100vh - 277px)",
-                "&::-webkit-scrollbar": {
-                  width: 7,
-                },
-                "&::-webkit-scrollbar-track": {
-                  backgroundColor: "#ffffff",
-                },
-                "&::-webkit-scrollbar-thumb": {
-                  backgroundColor: "#DFDFDF",
-                  borderRadius: 2,
-                },
-              }}
-            >
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                  <TableRow className="table-head">
-                    <TableCell>Имя</TableCell>
-                    <TableCell align="left">Качество</TableCell>
-                    <TableCell align="center">Профессия</TableCell>
-                    <TableCell align="center">Количество встреч</TableCell>
-                    <TableCell align="center">Оценка</TableCell>
-                    <TableCell align="center">Избранное</TableCell>
-                    <TableCell align="center"></TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {
-                    users && filteredUsers.length >= 1 ?
-                      userCrop.map((user) => (
-                        <Users
-                          key={user._id}
-                          handleBookmark={handleBookmark}
-                          handleDelete={handleDelete}
-                          {...user}
-                        />
-                      ))
-                      : <tr className="table-clear"><th>Человек с профессией {indexListBtn ? <strong>{indexListBtn.name}</strong> : ""} отсутсвует</th></tr>
-                       
-                  }
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
+          <GTable
+            indexListBtn={indexListBtn}
+            handleDelete={handleDelete}
+            handleBookmark={handleBookmark}
+            handleHeadSort={handleHeadSort}
+            userCrop={userCrop}
+            currentSort={sortBy}
+            filteredUsers={filteredUsers}
+            users={users}/>
         }
 
-        { usersLength > 0 && pages > 1 ?
-          <Pagination
-            className="pagination"
-            count={pages}
-            page={dataPage}
-            onChange={onDataPageChange}
-            variant="outlined"
-            shape="rounded"
-          />
-          : <></>
+        { 
+          usersLength > 0 && pages > 1 ?
+            <Pagination
+              className="pagination"
+              count={pages}
+              page={dataPage}
+              onChange={onDataPageChange}
+              variant="outlined"
+              shape="rounded"
+            />
+            : <></>
         }
       </div>
     </section>
