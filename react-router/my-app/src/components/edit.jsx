@@ -1,11 +1,11 @@
 import React from "react";
 
-const Posts = () => {
+const Edit = () => {
   return (
     <div>
-      <h1>Posts</h1>
+      <h1>Edit</h1>
     </div>
   );
 };
 
-export default Posts;
+export default Edit;
